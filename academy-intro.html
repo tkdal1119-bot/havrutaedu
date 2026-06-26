@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>책통하브루타 학원 소개</title>
+  <style>
+    :root {
+      --ink: #18222b;
+      --muted: #687681;
+      --line: #e1e7eb;
+      --paper: #fbfcf7;
+      --soft: #f1f7e8;
+      --green: #8ccf21;
+      --green-deep: #236b37;
+      --blue: #28568f;
+      --orange: #f28a14;
+      --gold: #ffc843;
+      --white: #ffffff;
+      --shadow: 0 20px 55px rgba(24, 34, 43, .14);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.62;
+      word-break: keep-all;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px clamp(18px, 5vw, 70px);
+      border-bottom: 1px solid rgba(225, 231, 235, .84);
+      background: rgba(251, 252, 247, .92);
+      backdrop-filter: blur(14px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 900;
+      color: var(--blue);
+      letter-spacing: 0;
+    }
+    .brand img { width: 164px; height: auto; }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .nav a:hover { color: var(--green-deep); }
+    .call {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 16px;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--green-deep);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .hero {
+      position: relative;
+      min-height: 82vh;
+      display: grid;
+      align-items: end;
+      padding: clamp(70px, 9vw, 116px) clamp(18px, 5vw, 70px) clamp(42px, 6vw, 74px);
+      color: var(--white);
+      overflow: hidden;
+      background: #163726;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(13, 40, 31, .92), rgba(13, 40, 31, .64) 48%, rgba(13, 40, 31, .18)), url("academy-assets/class-live.jpg") center / cover;
+      transform: scale(1.02);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 22vh;
+      background: linear-gradient(0deg, rgba(13, 40, 31, .58), transparent);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(980px, 100%);
+    }
+    .hero-logo {
+      width: min(420px, 78vw);
+      margin-bottom: 24px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 16px 42px rgba(0,0,0,.18);
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: #ffe28c;
+      font-weight: 900;
+    }
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(42px, 7vw, 84px);
+      line-height: 1.07;
+      letter-spacing: 0;
+    }
+    .hero p {
+      max-width: 680px;
+      margin: 24px 0 30px;
+      color: rgba(255,255,255,.9);
+      font-size: clamp(17px, 2vw, 21px);
+      font-weight: 600;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 8px;
+      font-weight: 900;
+    }
+    .button.primary { color: var(--ink); background: var(--gold); }
+    .button.secondary { color: var(--white); border: 1px solid rgba(255,255,255,.5); background: rgba(255,255,255,.13); }
+    main section { padding: clamp(58px, 8vw, 96px) clamp(18px, 5vw, 70px); }
+    .inner { width: min(1160px, 100%); margin: 0 auto; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 450px);
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    .lead { margin: 0; color: var(--muted); font-size: 17px; font-weight: 600; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 13px;
+      border-radius: 8px;
+      color: var(--green-deep);
+      background: #e6f5d6;
+      font-weight: 900;
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+    .feature {
+      min-height: 260px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 12px 34px rgba(24,34,43,.08);
+    }
+    .feature b {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 22px;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: 22px;
+    }
+    .feature h3, .course h3 { margin: 0 0 10px; font-size: 22px; line-height: 1.25; }
+    .feature p, .course p { margin: 0; color: var(--muted); font-weight: 600; }
+    .courses { background: var(--soft); }
+    .course-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .course {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 14px 38px rgba(24,34,43,.1);
+    }
+    .course img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .course-body { padding: 24px; }
+    .course-label { display: inline-flex; margin-bottom: 14px; color: var(--orange); font-weight: 900; }
+    .method-list {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .method {
+      min-height: 156px;
+      padding: 20px 16px;
+      border-radius: 8px;
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+    .method strong { display: block; color: var(--blue); font-size: 20px; margin-bottom: 8px; }
+    .method span { color: var(--muted); font-weight: 700; }
+    .space-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .photo-main, .photo-stack img, .director-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .photo-main { min-height: 510px; }
+    .photo-stack { display: grid; grid-template-rows: 1fr 1fr; gap: 18px; }
+    .quote-band {
+      margin-top: 20px;
+      padding: 26px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 900;
+      line-height: 1.35;
+    }
+    .tuition { background: #fff; }
+    .tuition-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 28px;
+      align-items: center;
+    }
+    .tuition img {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .price-list { display: grid; gap: 12px; }
+    .price-row {
+      display: grid;
+      grid-template-columns: 1.1fr .7fr .9fr;
+      gap: 12px;
+      align-items: center;
+      padding: 16px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      font-weight: 800;
+    }
+    .price-row span:first-child { color: var(--blue); }
+    .price-row span:last-child { text-align: right; color: var(--orange); }
+    .director { background: #f6f8fb; }
+    .director-layout {
+      display: grid;
+      grid-template-columns: 360px minmax(0,1fr);
+      gap: 34px;
+      align-items: center;
+    }
+    .director-photo { aspect-ratio: 3 / 4; box-shadow: var(--shadow); }
+    .director-copy p { color: var(--muted); font-size: 17px; font-weight: 600; }
+    .contact {
+      color: var(--white);
+      background: linear-gradient(135deg, #163726, #28568f);
+    }
+    .contact-box {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(280px, 390px);
+      gap: 34px;
+      align-items: center;
+    }
+    .contact h2, .contact p { color: var(--white); }
+    .contact-card {
+      padding: 24px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.24);
+      background: rgba(255,255,255,.12);
+    }
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+      font-weight: 900;
+    }
+    .contact-row:first-child { padding-top: 0; }
+    .contact-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .contact-row span { color: rgba(255,255,255,.76); }
+    footer { padding: 28px clamp(18px,5vw,70px); color: var(--muted); background: #f4f7f1; font-size: 14px; }
+    @media (max-width: 940px) {
+      .nav { display: none; }
+      .section-head, .space-grid, .tuition-layout, .director-layout, .contact-box { grid-template-columns: 1fr; }
+      .intro-grid, .course-grid { grid-template-columns: 1fr 1fr; }
+      .method-list { grid-template-columns: 1fr 1fr; }
+      .director-layout { gap: 22px; }
+      .director-photo { max-width: 360px; height: auto; }
+    }
+    @media (max-width: 620px) {
+      .brand img { width: 132px; }
+      .call { min-height: 38px; padding: 0 12px; font-size: 13px; }
+      .hero { min-height: 78vh; padding: 58px 18px 34px; }
+      .hero-logo { width: 82vw; padding: 10px 14px; }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+      .intro-grid, .course-grid, .method-list { grid-template-columns: 1fr; }
+      .photo-main { min-height: 320px; }
+      .price-row { grid-template-columns: 1fr; gap: 4px; }
+      .price-row span:last-child { text-align: left; }
+      .contact-row { display: grid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="책통하브루타 홈"><img src="academy-assets/logo-wide.jpg" alt="책통하브루타"></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#about">학원 소개</a>
+      <a href="#courses">프로그램</a>
+      <a href="#space">학습 공간</a>
+      <a href="#tuition">수업료</a>
+      <a href="#contact">상담</a>
+    </nav>
+    <a class="call" href="tel:01033920691">010-3392-0691</a>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <img class="hero-logo" src="academy-assets/logo-wide.jpg" alt="책통하브루타 로고">
+      <p class="eyebrow">정독·탐구 독서와 질문·토론으로 키우는 생각의 힘</p>
+      <h1>책을 잘 읽는 아이가 공부도 잘합니다</h1>
+      <p>책통하브루타는 지문을 정확히 읽고, 핵심을 찾고, 자기 생각을 말과 글로 표현하는 힘을 길러주는 독서·문해력·사고력 전문 학원입니다.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#courses">프로그램 보기</a>
+        <a class="button secondary" href="#contact">상담 문의</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <div class="inner">
+        <div class="section-head">
+          <h2>읽기부터 서술까지 이어지는 3절 독서</h2>
+          <p class="lead">단순히 많이 읽는 수업이 아니라, 지문을 정독하고 내용을 찾아내며 완성된 문장으로 표현하는 훈련을 합니다.</p>
+        </div>
+        <div class="intro-grid">
+          <article class="feature"><b>읽</b><h3>잘 읽고</h3><p>정독법으로 지문을 빠르고 정확하게 읽으며 의미 단위 읽기와 어휘력을 다집니다.</p></article>
+          <article class="feature"><b>찾</b><h3>잘 찾고</h3><p>글 속 핵심 정보와 근거를 찾아 독해력, 문제 인식력, 탐구력을 키웁니다.</p></article>
+          <article class="feature"><b>쓰</b><h3>잘 쓰고</h3><p>찾아낸 답을 서술형 문장으로 정리하며 표현력과 논리적 사고를 기릅니다.</p></article>
+        </div>
+        <div class="pill-row">
+          <span class="pill">문해력</span><span class="pill">어휘력</span><span class="pill">질문 탐구</span><span class="pill">토론</span><span class="pill">서술형 글쓰기</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="courses" id="courses">
+      <div class="inner">
+        <div class="section-head">
+          <h2>아이의 단계에 맞춘 하브루타 수업</h2>
+          <p class="lead">초등 저학년부터 중·고등학생까지 읽는 방식, 질문하는 방식, 쓰는 방식을 단계별로 훈련합니다.</p>
+        </div>
+        <div class="course-grid">
+          <article class="course"><img src="academy-assets/reading-program.jpg" alt="책통 정독 수업 안내"><div class="course-body"><span class="course-label">책통 정독 수업</span><h3>문해력과 어휘력의 뿌리</h3><p>초등 저·중학년은 의미 단위 읽기, 초등 고학년은 지문 독해와 인출 훈련, 중·고등학생은 통문장 정리와 서술 훈련을 진행합니다.</p></div></article>
+          <article class="course"><img src="academy-assets/thinking-program.jpg" alt="생각톡 하브루타 안내"><div class="course-body"><span class="course-label">생각톡 하브루타</span><h3>깊은 독서와 사고력</h3><p>질문 탐구, 생각 표현, 경청과 공감, 논리적 나눔, 자기성찰을 통해 말과 글의 깊이를 키웁니다.</p></div></article>
+          <article class="course"><img src="academy-assets/discussion-class.jpg" alt="교실에서 발표하는 수업 모습"><div class="course-body"><span class="course-label">질문·토론 수업</span><h3>자기 생각을 말하는 교실</h3><p>친구의 의견을 듣고 내 생각을 근거와 함께 표현하며 자신감, 관계 능력, 열린 태도를 함께 기릅니다.</p></div></article>
+        </div>
+        <div class="method-list">
+          <div class="method"><strong>01 질문 탐구</strong><span>왜, 어떻게를 묻는 힘</span></div>
+          <div class="method"><strong>02 생각 표현</strong><span>내 생각을 말로 정리</span></div>
+          <div class="method"><strong>03 경청·공감</strong><span>친구의 이야기를 듣는 태도</span></div>
+          <div class="method"><strong>04 나눔·배움</strong><span>근거로 말하고 비교하기</span></div>
+          <div class="method"><strong>05 메타인지</strong><span>배운 점을 글로 성찰</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="space">
+      <div class="inner">
+        <div class="section-head">
+          <h2>집중하기 좋은 학습 공간</h2>
+          <p class="lead">개별 좌석과 발표 공간, 독서 공간을 갖춘 교실에서 아이들이 책에 몰입하고 편하게 질문할 수 있습니다.</p>
+        </div>
+        <div class="space-grid">
+          <img class="photo-main" src="academy-assets/class-smile.jpg" alt="수업 중인 학생들">
+          <div class="photo-stack">
+            <img src="academy-assets/classroom-empty.jpg" alt="책통하브루타 교실 전경">
+            <img src="academy-assets/reading-room.jpg" alt="독서와 토론 공간">
+          </div>
+        </div>
+        <div class="quote-band">정독과 탐구 독서, 질문과 토론, 생각하는 힘을 한 공간에서 연결합니다.</div>
+      </div>
+    </section>
+
+    <section class="tuition" id="tuition">
+      <div class="inner tuition-layout">
+        <img src="academy-assets/tuition.jpg" alt="책통하브루타 정규수업 수업료 안내">
+        <div>
+          <p class="eyebrow">정규수업 안내</p>
+          <h2>필요한 수업을 골라 듣는 체계적인 과정</h2>
+          <p class="lead">정독법, 탐구독서, 문해력 교재, 그림책·탈무드·고전·시사, 온라인 하브루타까지 학생의 목표에 맞춰 선택할 수 있습니다.</p>
+          <div class="price-list" aria-label="주요 수업료">
+            <div class="price-row"><span>책통 주 2회</span><span>60분</span><span>초등 16만원 / 중등 18만원</span></div>
+            <div class="price-row"><span>문해력 하브루타 주 2회</span><span>60분</span><span>초등 16만원</span></div>
+            <div class="price-row"><span>생각톡 하브루타 주 1회</span><span>90분</span><span>초등 15만원 / 중등 17만원</span></div>
+            <div class="price-row"><span>온라인 하브루타 주 1회</span><span>60분</span><span>초등 10만원</span></div>
+            <div class="price-row"><span>시사 하브루타 주 1회</span><span>80분</span><span>온라인 14만원</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="director">
+      <div class="inner director-layout">
+        <img class="director-photo" src="academy-assets/director.jpg" alt="책통하브루타 원장 프로필 사진">
+        <div class="director-copy">
+          <p class="eyebrow">DIRECTOR</p>
+          <h2>아이의 읽기 습관과 생각의 태도를 함께 봅니다</h2>
+          <p>책통하브루타는 아이가 정답만 찾는 데서 멈추지 않고, 왜 그렇게 생각했는지 설명하고 다른 의견을 들으며 더 깊이 사고하도록 돕습니다.</p>
+          <p>수업 후에는 읽기 태도, 질문의 깊이, 표현의 변화까지 살피며 아이에게 맞는 다음 단계를 안내합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="inner contact-box">
+        <div>
+          <p class="eyebrow">CONTACT</p>
+          <h2>책 읽는 힘이 공부의 힘이 되도록 상담해보세요</h2>
+          <p class="lead">현재 학년, 읽기 습관, 글쓰기 부담, 수업 목표를 알려주시면 아이에게 맞는 과정을 안내드립니다.</p>
+          <div class="hero-actions" style="margin-top:26px"><a class="button primary" href="tel:01033920691">전화 상담하기</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-row"><span>학원명</span><strong>책통하브루타 학원</strong></div>
+          <div class="contact-row"><span>전화</span><strong>010-3392-0691</strong></div>
+          <div class="contact-row"><span>대상</span><strong>초등·중등·고등</strong></div>
+          <div class="contact-row"><span>핵심 수업</span><strong>정독·탐구 독서·하브루타</strong></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© 책통하브루타 학원. All rights reserved.</footer>
+</body>
+</html>
